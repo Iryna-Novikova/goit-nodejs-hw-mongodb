@@ -13,8 +13,7 @@ if (Number.isNaN(PORT)) {
 
 export const setupServer = () => {
   const app = express();
-
-  console.log('PORT is:', PORT);
+  // console.log('PORT is:', PORT);
 
   app.use(express.json());
   app.use(cors());
