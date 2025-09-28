@@ -7,4 +7,3 @@ const bootstrap = async () => {
 };
 
 bootstrap();
-// .catch(err => console.log(err))
