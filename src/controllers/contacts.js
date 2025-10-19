@@ -21,6 +21,7 @@ export const getContactsController = async (req, res) => {
     sortBy,
     sortOrder,
     filter,
+    userId: req.user._id,
   });
 
   if (contactsInfo.data.length === 0) {
@@ -37,7 +38,7 @@ export const getContactsController = async (req, res) => {
 //пошук за ID контакту
 export const getContactByIdController = async (req, res, next) => {
   const { contactId } = req.params;
-  const contact = await getContactById(contactId);
+  const contact = await getContactById(contactId, req.user._id);
 
   //якщо контакт не знайдено
   if (contact === null) {
@@ -53,7 +54,7 @@ export const getContactByIdController = async (req, res, next) => {
 };
 
 export const postContactController = async (req, res, next) => {
-  const contact = await postContact(req.body);
+  const contact = await postContact({ ...req.body, userId: req.user._id });
 
   res.status(201).json({
     status: 201,
@@ -66,7 +67,7 @@ export const postContactController = async (req, res, next) => {
 export const deleteContactController = async (req, res, next) => {
   const { contactId } = req.params;
 
-  const contact = await deleteContact(contactId);
+  const contact = await deleteContact(contactId, req.user._id);
 
   //якщо контакт не знайдено
   if (contact === null) {
@@ -80,7 +81,7 @@ export const deleteContactController = async (req, res, next) => {
 //Часткове оновлення контакту
 export const updateContactController = async (req, res, next) => {
   const { contactId } = req.params;
-  const contact = await updateContact(contactId, req.body);
+  const contact = await updateContact(contactId, req.user._id, req.body);
 
   if (contact === null) {
     throw createHttpError(404, `Contact with ID: ${contactId} not found.`);
