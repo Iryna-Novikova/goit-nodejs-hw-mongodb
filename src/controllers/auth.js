@@ -3,6 +3,8 @@ import {
   loginUser,
   logoutUser,
   refreshUsersSession,
+  requestResetToken,
+  resetPswrd,
 } from '../services/auth.js';
 import { RT_TERM } from '../constants/index.js';
 
@@ -62,6 +64,7 @@ const setupSession = (res, session) => {
   });
 };
 
+// контролер оновлення сесії користувача
 export const refreshUserSessionController = async (req, res) => {
   const session = await refreshUsersSession({
     sessionId: req.cookies.sessionId,
@@ -76,5 +79,26 @@ export const refreshUserSessionController = async (req, res) => {
     data: {
       accessToken: session.accessToken,
     },
+  });
+};
+
+// контролер скидання email
+export const requestResetEmailController = async (req, res) => {
+  await requestResetToken(req.body.email);
+  res.json({
+    status: 200,
+    message: 'Reset password email has been successfully sent.',
+    data: {},
+  });
+};
+
+// контролер зміни паролю
+export const resetPswrdController = async (req, res) => {
+  await resetPswrd(req.body);
+
+  res.json({
+    status: 200,
+    message: 'Password was successfully reset!',
+    data: {},
   });
 };
