@@ -35,10 +35,11 @@ parameters:
       properties:
         field:
           type: string
-          example: 'contactType'
+          example: 'type'
           description: 'Possible values: type(for contactType) or isFavourite'
         value:
           type: string
+          example: 'work'
           description: 'Possible value for type: work/home/personal; for isFavourite: true/false.'
 responses:
   '200':
