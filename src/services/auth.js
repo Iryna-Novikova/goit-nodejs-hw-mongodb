@@ -115,7 +115,7 @@ export const requestResetToken = async (email) => {
 
   const resetPswrdTemplatePath = path.join(
     TEMPLATES_DIR,
-    'reset-pswrd-email.html',
+    'send-pswrd-email.html',
   );
 
   const templateSource = (await fs.readFile(resetPswrdTemplatePath)).toString();
@@ -134,12 +134,12 @@ export const requestResetToken = async (email) => {
       html,
     });
   } catch (err) {
-    if (err instanceof Error)
-      throw createHttpError(
-        500,
-        `Failed to send the email, please try again later.`,
-      );
-    throw err;
+    // if (err instanceof Error)
+    throw createHttpError(
+      500,
+      `Failed to send the email, please try again later.`,
+    );
+    // throw err;
   }
 };
 

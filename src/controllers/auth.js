@@ -83,7 +83,7 @@ export const refreshUserSessionController = async (req, res) => {
 };
 
 // контролер скидання email
-export const requestResetEmailController = async (req, res) => {
+export const sendResetEmailController = async (req, res) => {
   await requestResetToken(req.body.email);
   res.json({
     status: 200,
