@@ -1,0 +1,53 @@
+type: object
+required:
+  - _id
+  - name
+  - phoneNumber
+  - contactType
+  - userId
+properties:
+  _id:
+    description: "Contact's id"
+    type: string
+    example: 8fad270e7f1469dd713faef
+  name:
+    description: "Contact's name"
+    type: string
+    example: 'Piter Pen'
+  phoneNumber:
+    description: "Contact's phoneNumber"
+    type: string
+    example: '+380739003939'
+  email:
+    description: "Contact's email"
+    type: string
+    example: 'piter@ukr.net'
+  isFavourite:
+    description: 'Whether contact is favourite or no.'
+    type: boolean
+    example: true
+    default: false
+  contactType:
+    description: "Type of contact. Possible variants: 'work', 'home', 'personal'"
+    type: string
+    example: 'personal'
+    default: 'personal'
+    enum: ['work', 'home', 'personal']
+  userID:
+    description: 'User Id who create contact'
+    type: string
+    example: 68f29b1cf5a78cd09815ae5f
+  photo:
+    description: 'Link to contacts picture'
+    type: string
+    format: binary
+    example: http://localhost:8080/uploads/1761348044130_ArtistsHUB.png
+    default: null
+  createdAt:
+    type: string
+    format: date-time
+    example: 2025-10-25T21:40:27.356Z
+  updatedAt:
+    type: string
+    format: date-time
+    example: 2025-10-25T21:40:27.356Z

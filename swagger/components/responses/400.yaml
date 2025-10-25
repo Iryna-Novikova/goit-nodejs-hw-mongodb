@@ -1,0 +1,43 @@
+description: Bad Request
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+        - message
+        - data
+      properties:
+        status:
+          type: integer
+          example: 400
+        message:
+          type: string
+          example: BadRequestError
+        data:
+          type: object
+          required:
+            - message
+            - errors
+          properties:
+            message:
+              type: string
+              example: 'Bad Request'
+            errors:
+              type: array
+              items:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'Name should have at least 3 characters'
+                  path:
+                    type: array
+                    items:
+                      type: string
+                      example: ['name']
+                  type:
+                    type: string
+                    example: 'string.min'
+                  context:
+                    type: object

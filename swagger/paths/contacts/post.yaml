@@ -1,0 +1,71 @@
+tags:
+  - Contacts
+summary: Create contact
+operationId: postContact
+description: 'Create new contact'
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        required:
+          - name
+          - phoneNumber
+          - contactType
+        properties:
+          name:
+            description: "Contact's name. Should have length between 3 and 20 symbols."
+            type: string
+            example: 'Piter Pen'
+          phoneNumber:
+            description: "Contact's phoneNumber. Should be from 12 to 15 symbols."
+            type: string
+            example: '+380739003938'
+          email:
+            description: "Contact's email"
+            type: string
+            example: 'piter@ukr.net'
+          isFavourite:
+            description: 'Whether contact is favourite or no.'
+            type: boolean
+            example: true
+            default: false
+          contactType:
+            description: 'Type of contact'
+            type: string
+            example: 'personal'
+            enum: ['work', 'home', 'personal']
+          photo:
+            description: 'Contacts picture'
+            type: string
+            format: binary
+            default: null
+responses:
+  '201':
+    description: Creates a contact
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: 'Successfully found contact with ID 68fad270e7f1469dd713faef!'
+            data:
+              type: object
+              $ref: ../../components/schemas/contact.yaml
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '500':
+    $ref: ../../components/responses/500.yaml
