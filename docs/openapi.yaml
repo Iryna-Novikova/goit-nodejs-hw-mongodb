@@ -12,8 +12,8 @@ tags:
   - name: Auth
     description: Auth operations.
 servers:
-  - url: http://localhost:8080
   - url: https://goit-nodejs-hw-mongodb-9f2x.onrender.com
+  - url: http://localhost:8080
 paths:
   /contacts:
     get:

@@ -29,18 +29,19 @@ parameters:
       enum: ['asc', 'desc']
       example: 'asc'
   - in: query
-    name: filter
+    name: type
     schema:
-      type: object
-      properties:
-        field:
-          type: string
-          example: 'type'
-          description: 'Possible values: type(for contactType) or isFavourite'
-        value:
-          type: string
-          example: 'work'
-          description: 'Possible value for type: work/home/personal; for isFavourite: true/false.'
+      type: string
+      example: '--'
+      enum: ['work', 'home', 'personal']
+    description: 'Filter by field contactType. Possible values: work, home, personal'
+  - in: query
+    name: isFavourite
+    schema:
+      type: boolean
+      example: '--'
+      default: false
+    description: 'Filter by field isFavourite. Possible value: true, false.'
 responses:
   '200':
     description: Successfully found contacts!
@@ -96,5 +97,7 @@ responses:
     $ref: '../../components/responses/400.yaml'
   '401':
     $ref: '../../components/responses/401.yaml'
+  # '404':
+  #   $ref: '../../components/responses/404.yaml'
   '500':
     $ref: ../../components/responses/500.yaml

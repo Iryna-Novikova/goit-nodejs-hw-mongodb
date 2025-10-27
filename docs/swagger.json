@@ -11,10 +11,10 @@
   },
   "servers": [
     {
-      "url": "http://localhost:8080"
+      "url": "https://goit-nodejs-hw-mongodb-9f2x.onrender.com"
     },
     {
-      "url": null
+      "url": "http://localhost:8080"
     }
   ],
   "tags": [
@@ -81,21 +81,27 @@
           },
           {
             "in": "query",
-            "name": "filter",
+            "name": "type",
             "schema": {
-              "type": "object",
-              "properties": {
-                "field": {
-                  "type": "string",
-                  "example": "contactType",
-                  "description": "Possible values: type(for contactType) or isFavourite"
-                },
-                "value": {
-                  "type": "string",
-                  "description": "Possible value for type: work/home/personal; for isFavourite: true/false."
-                }
-              }
-            }
+              "type": "string",
+              "example": "--",
+              "enum": [
+                "work",
+                "home",
+                "personal"
+              ]
+            },
+            "description": "Filter by field contactType. Possible values: work, home, personal"
+          },
+          {
+            "in": "query",
+            "name": "isFavourite",
+            "schema": {
+              "type": "boolean",
+              "example": "--",
+              "default": false
+            },
+            "description": "Filter by field isFavourite. Possible value: true, false."
           }
         ],
         "responses": {
@@ -450,6 +456,9 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
           "401": {
             "$ref": "#/components/responses/401"
           },
@@ -487,6 +496,9 @@
         "responses": {
           "204": {
             "description": "Successfully deleted contact"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
           },
           "404": {
             "$ref": "#/components/responses/404"
